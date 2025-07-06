@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, Users, CreditCard, User, MapPin, Phone, Mail } from 'lucide-react';
+import { Calendar, Users, CreditCard, User } from 'lucide-react';
+
+// ✅ Replace with YOUR Render URL!
+const API_BASE_URL = 'https://hotel-booking-api.onrender.com';
 
 interface Room {
   _id: string;
@@ -58,7 +61,7 @@ export default function BookingForm() {
 
   const fetchRoomDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/rooms/${roomId}`);
+      const response = await fetch(`${API_BASE_URL}/api/rooms/${roomId}`);
       const data = await response.json();
       setRoom(data);
     } catch (error) {
@@ -87,7 +90,7 @@ export default function BookingForm() {
 
     setSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch(`${API_BASE_URL}/api/bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -310,7 +313,6 @@ export default function BookingForm() {
                         placeholder="Street address"
                       />
                     </div>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
